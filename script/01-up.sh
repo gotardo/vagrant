@@ -44,14 +44,13 @@ sudo apt-get -y install php-redis
 # install composer from site, composer pkg from repositories have dependencies 
 # problems with php7.0
 php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
-php -r "if (hash('SHA384', file_get_contents('composer-setup.php')) === '7228c001f88bee97506740ef0888240bd8a760b046ee16db8f4095c0d8d525f2367663f22a46b48d072c816e7fe19959') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php --filename=composer
 php -r "unlink('composer-setup.php');"
 sudo mv composer /usr/local/bin/composer
 
 #install phpunit
-sudo curl -LsS https://phar.phpunit.de/phpunit.phar -o /usr/share/php/phpunit
-sudo chmod a+x /usr/share/php/phpunit
+sudo curl -LsS https://phar.phpunit.de/phpunit.phar -o /usr/local/bin/phpunit
+sudo chmod a+x /usr/local/bin/phpunit
 
 # install symfony2
 sudo curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
@@ -68,7 +67,7 @@ echo "============================================="
 echo "- Tools I like	"
 echo "============================================="
 sudo apt-get install -y nano
-
+sudo npm install apidoc -g
 
 echo "============================================="
 echo "Create shortcuts"
@@ -76,7 +75,8 @@ echo "============================================="
 
 echo "alias project_uncache=\"php bin/console -v cache:clear\"
 alias project_run=\"project_uncache && php bin/console -v server:run 192.168.51.10:8080\"
-alias project_dependencies=\"composer update && composer install\
+alias project_dependencies=\"composer update && composer install\"
+alias project_test=\"clear && php bin/console cache:clear &&  phpunit ./tests --verbose --colors\"
 " | sudo tee --append ~/.bash_profile
 
 source ~/.bash_profile
