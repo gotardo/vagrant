@@ -24,30 +24,38 @@ sudo apt-get -y install mongodb
 sudo apt-get -y install redis-server
 
 echo "============================================="
-echo "- Installing PHP"
+echo "- Installing PHP and extensions"
 echo "============================================="
 
 sudo apt-get -y install php7.0-fpm php7.0-cli php7.0-common php7.0-dev
+sudo apt-get -y install php-mcrypt php-zip php-curl php-json php-opcache php-mysqli php-xml php-mongodb php-redis php-bz2
+
 
 echo "============================================="
-echo "- Installing PHP Extensions and tools"
+echo "- Installing PHP tools"
 echo "============================================="
-
-sudo apt-get -y install php-mcrypt
-sudo apt-get -y install php-zip 
-sudo apt-get -y install php-curl 
-sudo apt-get -y install php-json 
-sudo apt-get -y install php-opcache
-sudo apt-get -y install php-mysqli
-sudo apt-get -y install php-xml 
-sudo apt-get -y install php-mongodb 
-sudo apt-get -y install php-redis
 
 # install composer from site, composer pkg from repositories have dependencies 
 php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php
 php composer-setup.php --filename=composer
 php -r "unlink('composer-setup.php');"
 sudo mv composer /usr/local/bin/composer
+
+# Install PHP Code Sniffer and PHP Mess Detector utilities
+curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+sudo mv phpcs.phar /usr/local/bin/phpcs
+sudo chmod +x /usr/local/bin/phpcs
+phpcs -h
+
+curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+sudo mv phpcbf.phar /usr/local/bin/phpcbf
+sudo chmod +x /usr/local/bin/phpcbf
+phpcbf -h
+
+curl -OL http://static.phpmd.org/php/latest/phpmd.phar
+sudo mv phpmd.phar /usr/local/bin/phpmd
+sudo chmod +x /usr/local/bin/phpmd
+phpmd -h
 
 #install phpunit
 sudo curl -LsS https://phar.phpunit.de/phpunit.phar -o /usr/local/bin/phpunit
@@ -76,8 +84,9 @@ echo "============================================="
 echo "alias project_uncache=\"php bin/console -v cache:clear\"
 alias project_run=\"project_uncache && php bin/console -v server:run 192.168.51.10:8080\"
 alias project_dependencies=\"composer update && composer install\"
+alias project_codecheck=\"clear && phpcs ./src && phpcs ./test && phpmd ./src text cleancode,codesize,controversial,design,naming,unusedcode && phpmd ./tests text cleancode,codesize,controversial,design,naming,unusedcode\"
 alias project_test=\"clear && php bin/console cache:clear &&  phpunit ./tests --verbose --colors\"
-" | sudo tee --append /home/vagrant/.bash_profile
+"| sudo tee --append /home/vagrant/.bash_profile
 
 source /home/vagrant/.bash_profile
 sudo service php7.0-fpm restart
