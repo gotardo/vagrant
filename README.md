@@ -5,7 +5,6 @@ This is a virtual environment for PHP7/Symfony development.
 
 To execute it just go to your vm folder and create your www directory (to be shared with the machine), clone the directory and raise the vagrant machine by executing this in your terminal:
 ```
-$ mkdir ./www
 $ git clone https://github.com/gotardo/vagrantfiles . && vagrant up
 ```
 ### Features
