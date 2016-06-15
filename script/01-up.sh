@@ -28,7 +28,7 @@ echo "- Installing PHP and extensions"
 echo "============================================="
 
 sudo apt-get -y install php7.0-fpm php7.0-cli php7.0-common php7.0-dev
-sudo apt-get -y install php-mcrypt php-zip php-curl php-json php-opcache php-mysqli php-xml php-mongodb php-redis php-bz2
+sudo apt-get -y install php-mcrypt php-zip php-curl php-json php-opcache php-mysqli php-xml php-mongodb php-redis php-bz2 php-xdebug
 
 
 echo "============================================="
@@ -84,8 +84,8 @@ echo "============================================="
 echo "alias project_uncache=\"php bin/console -v cache:clear\"
 alias project_run=\"project_uncache && php bin/console -v server:run 192.168.51.10:8080\"
 alias project_dependencies=\"composer update && composer install\"
-alias project_codecheck=\"clear && phpcs ./src && phpcs ./test && phpmd ./src text cleancode,codesize,controversial,design,naming,unusedcode && phpmd ./tests text cleancode,codesize,controversial,design,naming,unusedcode\"
-alias project_test=\"clear && php bin/console cache:clear &&  phpunit ./tests --verbose --colors\"
+alias project_codecheck=\"clear && phpcs --standard=CodeSnifferRuleset.xml ./src && phpcs --standard=CodeSnifferRuleset.xml ./test && phpmd ./src text cleancode,codesize,controversial,design,naming,unusedcode && phpmd ./tests text cleancode,codesize,controversial,design,naming,unusedcode\"
+alias project_test=\"clear && php bin/console cache:clear && phpunit --coverage-text --verbose --colors\"
 "| sudo tee --append /home/vagrant/.bash_profile
 
 source /home/vagrant/.bash_profile
