@@ -82,10 +82,11 @@ echo "Create shortcuts"
 echo "============================================="
 
 echo "alias project_uncache=\"php bin/console -v cache:clear\"
-alias project_run=\"project_uncache && php bin/console -v server:run 192.168.51.10:8080\"
+alias project_run=\"project_uncache && php bin/console -v server:run 0.0.0.0:8080\"
 alias project_dependencies=\"composer update && composer install\"
 alias project_codecheck=\"clear && phpcs --standard=CodeSnifferRuleset.xml ./src && phpcs --standard=CodeSnifferRuleset.xml ./test && phpmd ./src text cleancode,codesize,controversial,design,naming,unusedcode && phpmd ./tests text cleancode,codesize,controversial,design,naming,unusedcode\"
 alias project_test=\"clear && php bin/console cache:clear && phpunit --coverage-text --verbose --colors\"
+alias project_doc=\"php bin/console api:doc:dump --format=html --no-sandbox > docs/api.html\"
 "| sudo tee --append /home/vagrant/.bash_profile
 
 source /home/vagrant/.bash_profile
