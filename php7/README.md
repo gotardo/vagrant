@@ -59,9 +59,9 @@ clear && phpcs ./src && phpcs ./test && phpmd ./src text cleancode,codesize,cont
 ```
 
 #### project_test
-It will clear cache and execute PHP Unit to launch the tests by using the Symfony's default configuration. 
+It will clear cache, generate the database (by convention, placed in db/db.sql) and execute PHP Unit to launch the tests by using the project's default configuration placed in phpunit.xml.dist.
 
 It equals to:
 ```
-clear && php bin/console cache:clear &&  phpunit ./tests --verbose --colors
+clear && mysql -u root -p123456  kayoo2 < db/db.sql  && php bin/console cache:clear &&  phpunit ./tests --verbose --colors
 ```
