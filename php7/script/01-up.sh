@@ -24,6 +24,14 @@ sudo apt-get -y install mongodb
 sudo apt-get -y install redis-server
 
 echo "============================================="
+echo "- Installing MySQL"
+echo "============================================="
+sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password password 123456'
+sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password_again password 123456'
+sudo apt-get -y install mysql-server-5.7
+sudo apt-get -y install mysql-client-5.7
+
+echo "============================================="
 echo "- Installing PHP and extensions"
 echo "============================================="
 
