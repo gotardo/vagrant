@@ -7,12 +7,11 @@ sudo apt-get update -y
 sudo apt-get install -y git curl zip unzip 
 sudo apt-get install -y nano
 
-
 echo "============================================="
-echo "- Installing Java. Good luck, boy :S"
+echo "- Installing Java Dependencies"
 echo "============================================="
-
-sudo apt-get install -y default-jre default-jdk
+sudo apt-get -y install openjdk-8-jre
+sudo apt-get -y install openjdk-8-jdk
 
 echo "============================================="
 echo "- Installing MySQL"
