@@ -52,3 +52,9 @@ PATH=$PATH:$INSTALLATION_PATH/bin/
 # http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
 wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-2.8.zip
 unzip sonar-scanner-2.8.zip
+
+echo "============================================="
+echo "- Sonar PHP extension"
+echo "============================================="
+sudo wget http://sonarsource.bintray.com/Distribution/sonar-php-plugin/sonar-php-plugin-2.8.jar -P $INSTALLATION_PATH/extensions/plugins/
+
