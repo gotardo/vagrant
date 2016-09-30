@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
 	config.vm.provision "shell", path: "script/01-up.sh"
 	
 	config.vm.provider "virtualbox" do |v|
-		v.name = "ubuntu-xenial"
+		v.name = "ubuntu-sonarqube"
 		v.customize [
 			"modifyvm", :id, 
 			"--memory", 4096, 

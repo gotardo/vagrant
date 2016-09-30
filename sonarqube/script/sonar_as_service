@@ -15,4 +15,4 @@
 # Description: SonarQube system (www.sonarsource.org)
 ### END INIT INFO
  
-/usr/local/sonar $*
+/usr/bin/sonar $*
