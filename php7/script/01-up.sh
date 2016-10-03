@@ -24,6 +24,14 @@ sudo apt-get -y install mongodb
 sudo apt-get -y install redis-server
 
 echo "============================================="
+echo "- Installing MySQL"
+echo "============================================="
+sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password password 123456'
+sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password_again password 123456'
+sudo apt-get -y install mysql-server-5.7
+sudo apt-get -y install mysql-client-5.7
+
+echo "============================================="
 echo "- Installing PHP and extensions"
 echo "============================================="
 
@@ -85,9 +93,10 @@ echo "alias project_uncache=\"php bin/console -v cache:clear\"
 alias project_run=\"project_uncache && php bin/console -v server:run 0.0.0.0:8080\"
 alias project_dependencies=\"composer update && composer install\"
 alias project_codecheck=\"clear && phpcs --standard=CodeSnifferRuleset.xml ./src && phpcs --standard=CodeSnifferRuleset.xml ./test && phpmd ./src text cleancode,codesize,controversial,design,naming,unusedcode && phpmd ./tests text cleancode,codesize,controversial,design,naming,unusedcode\"
-alias project_test=\"clear && php bin/console cache:clear && phpunit --coverage-text --verbose --colors\"
+alias project_test=\"clear &&  mysql -u root -p123456  kayoo2 < db/db.sql && php bin/console cache:clear && phpunit --coverage-text --verbose --colors --coverage-html ./report\"
 alias project_doc=\"php bin/console api:doc:dump --format=html --no-sandbox > docs/api.html\"
 "| sudo tee --append /home/vagrant/.bash_profile
+
 
 source /home/vagrant/.bash_profile
 sudo service php7.0-fpm restart
