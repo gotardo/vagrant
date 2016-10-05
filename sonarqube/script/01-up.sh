@@ -79,3 +79,12 @@ echo "- Launch SonarQube"
 echo "============================================="
 
 sudo ./sonarqube-6.0/bin/linux-x86-64/sonar.sh start
+
+
+echo "============================================="
+echo "- Create Shortcuts"
+echo "============================================="
+
+
+echo "alias project_scan=\"/home/vagrant/sonar-scanner-2.8/bin/sonar-scanner\"
+"| sudo tee --append /home/vagrant/.bash_profile
