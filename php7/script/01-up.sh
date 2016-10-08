@@ -97,6 +97,7 @@ echo "alias project_uncache=\"php bin/console -v cache:clear\"
 alias project_run=\"project_uncache && php bin/console -v server:run 0.0.0.0:8080\"
 alias project_dependencies=\"composer update && composer install\"
 alias project_codecheck=\"clear && phpcs --standard=CodeSnifferRuleset.xml ./src && phpcs --standard=CodeSnifferRuleset.xml ./test && phpmd ./src text cleancode,codesize,controversial,design,naming,unusedcode && phpmd ./tests text cleancode,codesize,controversial,design,naming,unusedcode\"
+alias project_codefix=\"php-cs-fixer fix ./src --level=symfony\"
 alias project_test=\"clear &&  mysql -u root -p123456  kayoo2 < db/db.sql && php bin/console cache:clear && phpunit --coverage-text --verbose --colors --coverage-html ./report\"
 alias project_doc=\"php bin/console api:doc:dump --format=html --no-sandbox > docs/api.html\"
 "| sudo tee --append /home/vagrant/.bash_profile
