@@ -73,6 +73,10 @@ sudo chmod a+x /usr/local/bin/phpunit
 sudo curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
 sudo chmod a+x /usr/local/bin/symfony
 
+# install codefixer
+sudo curl -LsS https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v1.12.2/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer
+sudo chmod a+x /usr/local/bin/php-cs-fixer
+
 echo "============================================="
 echo "- Extra dependencies"
 echo "============================================="
