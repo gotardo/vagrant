@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+	config.vm.box = "ubuntu/artful64"
+	config.vm.synced_folder "./www/", "/var/www/", type: "nfs"
+	config.vm.network :private_network, ip: "192.168.51.10"
+	
+	config.vm.provision "shell", path: "script/01-up.sh"
+	
+	config.vm.provider "virtualbox" do |v|
+		v.name = "ubuntu-artful-php71"
+		v.customize [
+			"modifyvm", :id, 
+			"--memory", 2048, 
+			"--cpus", 1,
+			"--natdnshostresolver1", "on",
+            "--natdnsproxy1", "on"]		
+	end	
+end
